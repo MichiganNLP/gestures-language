@@ -24,16 +24,15 @@ from scheduler import get_cosine_schedule_with_warmup
 from utils import save_checkpoint
 from typing import Callable, Iterable, Optional, Tuple, Union
 
+
 train_dataset = SpeechMotionDataset(lmdb_dir='./data/lmdb_train', lmdb_dir_spanish='./data/train_spanish_norm', n_poses=12)
 
-train_loader = DataLoader(dataset=train_dataset, batch_size=32,
-                          shuffle=True, drop_last=True, num_workers=10, pin_memory=True)
+train_loader = DataLoader(dataset=train_dataset, batch_size=32, shuffle=True, drop_last=True, num_workers=10, pin_memory=True)
 
 
 val_dataset = SpeechMotionDataset('./data/lmdb_val', './data/valid_spanish_norm', 12)
 
-val_loader = DataLoader(dataset=val_dataset, batch_size=32,
-                          shuffle=False, drop_last=True, num_workers=10, pin_memory=True)
+val_loader = DataLoader(dataset=val_dataset, batch_size=32, shuffle=False, drop_last=True, num_workers=10, pin_memory=True)
 
 
 model = GestureCLIP(embed_dim=768, context_length=15, transformer_width=768, transformer_heads=12, transformer_layers=12)
